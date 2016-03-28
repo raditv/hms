@@ -1,0 +1,28 @@
+.chart-legend ul {
+    list-style: none;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-size: 12px;
+}
+.chart-legend ul span {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    margin-right: 0.5em;
+}
+.chart-legend li {
+    text-indent: 16px;
+    line-height: 24px;
+    position: relative;
+    display: block;
+    float: left;
+    font-size: 1em;
+}
+.chart-legend  li:before {
+    display: block;
+    width: 10px;
+    height: 16px;
+    position: absolute;
+    left: 0;
+    top: 3px;
+    content: "";
+}
