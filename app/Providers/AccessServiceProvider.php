@@ -108,6 +108,11 @@ class AccessServiceProvider extends ServiceProvider
             \App\Repositories\Backend\Report\DailySalesOutContract::class,
             \App\Repositories\Backend\Report\EloquentDailySalesOutRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Backend\Report\ReservationContract::class,
+            \App\Repositories\Backend\Report\EloquentReservationRepository::class
+        );
     }
 
     /**

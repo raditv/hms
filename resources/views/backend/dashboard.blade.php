@@ -16,9 +16,15 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
+              <h3>
+                @if(count($reservations))
+                {{ $reservations[0]['TODAY'] }}
+                @else
+                0
+                @endif
+              </h3>
 
-              <p>Test Commit</p>
+              <p>Room Available</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -31,9 +37,15 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3>
+                @if(count($reservations))
+                {{ $reservations[2]['TODAY'] }}
+                @else
+                0
+                @endif
+              </h3>
 
-              <p>Revenue</p>
+              <p>Vacant Room</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -46,9 +58,15 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>
+                @if(count($reservations))
+                {{ $reservations[3]['TODAY'] }}
+                @else
+                0
+                @endif
+              </h3>
 
-              <p>Guests</p>
+              <p>Out of Order Room</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -61,9 +79,15 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3>
+                @if(count($reservations))
+                {{ $reservations[9]['TODAY'] }}
+                @else
+                0
+                @endif
+              </h3>
 
-              <p>Sales</p>
+              <p>Occupied Room</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Report\DailySalesContract;
 use App\Repositories\Backend\Report\DailySalesOutContract;
+use App\Repositories\Backend\Report\ReservationContract;
 use DB;
 /**
  * Class DashboardController
@@ -17,14 +18,17 @@ class DashboardController extends Controller
      */
     protected $dailySales;
 	protected $dailySalesOut;
+    protected $reservation;
 
 	public function __construct(
         DailySalesContract $dailySales,
-        DailySalesOutContract $dailySalesOut
+        DailySalesOutContract $dailySalesOut,
+        ReservationContract $reservation
     )
     {
         $this->dailySales  = $dailySales;
         $this->dailySalesOut  = $dailySalesOut;
+        $this->reservation = $reservation;
 
     }
 
@@ -129,7 +133,7 @@ class DashboardController extends Controller
     public function index()
     {
         $date = date('Y/m/d');
-        $fakedate = '2016/03/22';
+        $fakedate = '2015/06/25';
         $data = array();
         $revenues = $this->dailySales->getRevenueChild($fakedate);
 
@@ -145,6 +149,7 @@ class DashboardController extends Controller
         javascript()->put([
             'dailyRevenue' => $data,
         ]);
-        return view('backend.dashboard');
+        return view('backend.dashboard')
+                ->withReservations($this->reservation->generateReport($date));
     }
 }
