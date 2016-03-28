@@ -18,7 +18,7 @@
             <div class="inner">
               <h3>150</h3>
 
-              <p>Room Available</p>
+              <p>Test Commit</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
