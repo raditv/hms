@@ -19,7 +19,7 @@ class EloquentDailySalesRepository implements DailySalesContract
         return DailySales::where('NORPT','>=','20')
                 ->where('NORPT','<=','28')
                 ->where('DATEDAILYRPT',$dt)
-                ->select('DATEDAILYRPT', 'DESCRIPTION','TODAY')
+                ->select('DATEDAILYRPT', 'DESCRIPTION','TODAY','THISMONTH','THISYEAR')
                 ->get();
     }
     public function getTenDaysRevenue()
