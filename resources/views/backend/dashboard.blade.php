@@ -240,7 +240,7 @@ nv.addGraph(function() {
       .color(d3.scale.category10().range());
 
     d3.select("#monthlySales svg")
-        .datum(dailySales)
+        .datum(monthlySales)
       .transition().duration(1200)
         .call(chart);
 
@@ -254,7 +254,7 @@ nv.addGraph(function() {
       .color(d3.scale.category10().range());
 
     d3.select("#yearlySales svg")
-        .datum(dailySales)
+        .datum(yearlySales)
       .transition().duration(1200)
         .call(chart);
 
