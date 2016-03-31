@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Report\DailySalesContract;
 use App\Repositories\Backend\Report\DailySalesOutContract;
 use App\Repositories\Backend\Report\ReservationContract;
-use DB;
+use Illuminate\Http\Request;
 /**
  * Class DashboardController
  * @package App\Http\Controllers\Backend
@@ -31,30 +31,9 @@ class DashboardController extends Controller
         $this->reservation = $reservation;
 
     }
-    public function dailySalesChart()
+    public function update()
     {
-        $revenues = $this->dailySales->getTenDaysRevenue();
-        $sales = $this->dailySales->getTenDaysAR();
-        $salesDataset = array();
-        $revenueDataset = array();
-        foreach($sales as $key => $sale)
-        {
-            array_push($salesDataset,array("series"=>$key,
-                                           "x"=>strtotime($revenues[$key]->DATEDAILYRPT)*1000,
-                                           "y"=>intval($sale->TODAY)));
-            array_push($revenueDataset,array("series"=>$key,
-                                             "x"=>strtotime($revenues[$key]->DATEDAILYRPT)*1000,
-                                             "y"=>intval($revenues[$key]->TODAY)));
-        }
-
-        $salesData = array("values"=> $salesDataset,
-                           "key"=> "Sales", 
-                           "area"=> true);
-        $revenuesData = array("values"=> $revenueDataset,
-                              "key"=> "Revenue", 
-                              "area"=> true);
-        $chartData = array($salesData, $revenuesData);
-        return response()->json($chartData);       
+        access()->update();  
     }
     public function index()
     {

@@ -43,10 +43,15 @@ class Access
     }
     public function update()
     {
-        $path = "C:\inetpub\wwwroot\hms"; 
+        //$path = "C:\inetpub\wwwroot\hms";
+        $path = "/Users/Shared/hmsreport"; 
+
         chdir($path);
-        exec("git pull origin", $output, $return_var);
-        echo $return_var;;
+        exec("git pull origin", $output);
+        for($i=0;$i<sizeof($output);$i++)
+        {
+            print($output[$i]);
+        }
     }
 
     /**
