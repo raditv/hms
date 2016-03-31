@@ -33,7 +33,7 @@ class DashboardController extends Controller
     }
     public function update()
     {
-        access()->update();  
+        return access()->update();  
     }
     public function index()
     {
