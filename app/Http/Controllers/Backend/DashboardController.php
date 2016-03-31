@@ -33,7 +33,7 @@ class DashboardController extends Controller
     }
     public function update()
     {
-        echo "Test";
+        echo "Test lagi";
         return access()->update();  
     }
     public function index()
