@@ -62,7 +62,7 @@ class DashboardController extends Controller
         $salesDataset = array();
         $sales = $this->dailySales->getTenDaysSales();
         $labels = $this->dailySales->getSalesLabel();
-        $revenues = $this->dailySales->getTodaySales();
+        $revenues = $this->dailySales->getTodaySales($date);
         $label = array();
         $sale = array();
         $chartData = array();

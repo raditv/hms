@@ -14,11 +14,11 @@ class EloquentDailySalesRepository implements DailySalesContract
     	return DailySales::where('DATEDAILYRPT',$dt)
                 ->orderBy('NORPT','asc')->get();
     }
-    public function getTodaySales()
+    public function getTodaySales($dt)
     {
         return DailySales::where('NORPT','>=','20')
                 ->where('NORPT','<=','28')
-                ->where('DATEDAILYRPT','2016/03/01')
+                ->where('DATEDAILYRPT',$dt)
                 ->select('DATEDAILYRPT', 'DESCRIPTION','TODAY')
                 ->get();
     }
@@ -42,9 +42,10 @@ class EloquentDailySalesRepository implements DailySalesContract
     }
     public function getTenDaysSales()
     {
+        $lastDay = strtotime("-15 day");
         return DailySales::where('NORPT','>=','20')
                 ->where('NORPT','<=','28')
-                ->whereBetween('DATEDAILYRPT',['2016/03/01', '2016/03/20'])
+                ->whereBetween('DATEDAILYRPT', [date('Y/m/d', $lastDay), date('Y/m/d')])
                 ->select('DATEDAILYRPT', 'DESCRIPTION','TODAY')
                 ->get();
     }
