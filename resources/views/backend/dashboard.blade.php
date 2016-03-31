@@ -8,6 +8,7 @@
 @endsection
 @section('after-styles-end')
     {!! Html::style('js/backend/plugin/chartjs/Chart.css') !!}
+    {!! Html::style('js/backend/plugin/d3/nv.d3.css') !!}
 @stop
 @section('content')
     <!-- Small boxes (Stat box) -->
@@ -99,11 +100,11 @@
     </div>
     <div class="row">
         <!-- Left col -->
-        <section class="col-lg-6 connectedSortable">
+        <section class="col-lg-12 connectedSortable">
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Daily Revenue Chart</h3>
+              <h3 class="box-title">Daily Sales</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -112,18 +113,19 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <canvas id="dailyRevenue" style="height:250px"></canvas>
-                <div id="dailyRevenueLegend" class="chart-legend"></div>
+                <div class="chart" id="dailyRevenue">
+                <svg></svg>
+                </div>
               </div>
             </div>
             <!-- /.box-body -->
         </div>
         </section>
-        <section class="col-lg-6 connectedSortable">
+        <section class="col-lg-12 connectedSortable">
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Monthly Revenue Chart</h3>
+              <h3 class="box-title">Last Ten Days Sales</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -132,63 +134,64 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <canvas id="monthlyRevenue" style="height:250px"></canvas>
-                <div id="monthlyRevenueLegend" class="chart-legend"></div>
+                <div class="chart" id="dailySales">
+                <svg></svg>
+                </div>
               </div>
             </div>
             <!-- /.box-body -->
         </div>
-        </section>
-        <section class="col-lg-6 connectedSortable">
-          <!-- LINE CHART -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Yearly Revenue Chart</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <canvas id="yearlyRevenue" style="height:250px"></canvas>
-                <div id="yearlyRevenueLegend" class="chart-legend"></div>
-              </div>
-            </div>
-            <!-- /.box-body -->
-        </div>
-        </section>
-        <section class="col-lg-6 connectedSortable">
-          <!-- LINE CHART -->
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Last 10 Days Revenue & Account Receiveable</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="chart">
-                <canvas id="dailySales" style="height:250px"></canvas>
-                <div id="salesLegend" class="chart-legend"></div>
-              </div>
-            </div>
-            <!-- /.box-body -->
-</div>
         </section>
     </div>
     
 @endsection
 @section('after-scripts-end')
-<script>
-        //Being injected from FrontendController
-        console.log(test);
-</script>
 {!! Html::script('js/backend/plugin/chartjs/Chart.min.js') !!}
+{!! Html::script('js/backend/plugin/d3/d3.v3.min.js') !!}
+{!! Html::script('js/backend/plugin/d3/nv.d3.min.js') !!}
 <script>
+nv.addGraph(function() {
+        var chart = nv.models.lineChart()
+                      .x(function (d) { return d.x; })
+                      .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+                      .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                      .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                      .showYAxis(true)        //Show the y-axis
+                      .showXAxis(true)        //Show the x-axis
+                      .color(d3.scale.category10().range());
+
+        chart.xAxis     //Chart x-axis settings
+            .tickFormat(function(d) {
+              return d3.time.format('%x')(new Date(d))
+            });
+
+        chart.yAxis     //Chart y-axis settings
+            .tickFormat(d3.format('.02f'));
+
+        d3.select('#dailySales svg')    //Select the <svg> element you want to render the chart in.   
+            .datum(salesData)         //Populate the <svg> element with chart data...
+            .call(chart);          //Finally, render the chart!
+
+        //Update the chart when window resizes.
+        nv.utils.windowResize(function() { chart.update() });
+        return chart;
+});
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)
+      .color(d3.scale.category10().range());
+
+    d3.select("#dailyRevenue svg")
+        .datum(testChart)
+      .transition().duration(1200)
+        .call(chart);
+
+  return chart;
+});
+
+/*
 Chart.defaults.global.scaleLabel = function(label){
     return new Intl.NumberFormat().format(label.value);
 };
@@ -203,6 +206,7 @@ $(document).on('ready', function() {
   var dailySalesChart = new Chart(ds).Pie(dailyRevenue);
   document.getElementById("dailyRevenueLegend").innerHTML = dailySalesChart.generateLegend();
 });
+/*
 $(document).on('ready', function() {
     $.ajax({
         url: "/admin/monthlyrevenue",
@@ -227,6 +231,7 @@ $(document).on('ready', function() {
         document.getElementById("yearlyRevenueLegend").innerHTML = dailySalesChart.generateLegend();
     });   
 });
+
 $(document).on('ready', function() {
     $.ajax({
         url: "/admin/dailysaleschart",
@@ -234,10 +239,34 @@ $(document).on('ready', function() {
         dataType: 'json',
         method: "post"
     }).done(function (data) {
-        var dso = document.getElementById("dailySales").getContext("2d");
-        var dailySalesOutChart = new Chart(dso).Line(data);
-        document.getElementById("salesLegend").innerHTML = dailySalesOutChart.generateLegend();
+        nv.addGraph(function() {
+        var chart = nv.models.lineChart()
+                      .x(function (d) { return d.x; })
+                      .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+                      .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                      .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                      .showYAxis(true)        //Show the y-axis
+                      .showXAxis(true)        //Show the x-axis
+                      .color(d3.scale.category10().range());
+
+        chart.xAxis     //Chart x-axis settings
+            .tickFormat(function(d) {
+              return d3.time.format('%x')(new Date(d))
+            });
+
+        chart.yAxis     //Chart y-axis settings
+            .tickFormat(d3.format('.02f'));
+
+        d3.select('#dailySales svg')    //Select the <svg> element you want to render the chart in.   
+            .datum(salesData)         //Populate the <svg> element with chart data...
+            .call(chart);          //Finally, render the chart!
+
+        //Update the chart when window resizes.
+        nv.utils.windowResize(function() { chart.update() });
+        return chart;
+      });
     });   
 });
+*/
 </script>
 @stop

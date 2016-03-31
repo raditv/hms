@@ -14,11 +14,19 @@ class EloquentDailySalesRepository implements DailySalesContract
     	return DailySales::where('DATEDAILYRPT',$dt)
                 ->orderBy('NORPT','asc')->get();
     }
+    public function getTodaySales()
+    {
+        return DailySales::where('NORPT','>=','20')
+                ->where('NORPT','<=','28')
+                ->where('DATEDAILYRPT','2016/03/01')
+                ->select('DATEDAILYRPT', 'DESCRIPTION','TODAY')
+                ->get();
+    }
     public function getTenDaysRevenue()
     {
     	$lastDay = strtotime("-10 day");
-    	return DailySales::whereBetween('DATEDAILYRPT', [date('Y/m/d', $lastDay), date('Y/m/d')])
-    	//return DailySales::whereBetween('DATEDAILYRPT', ['2015/07/01', '2015/07/07'])
+    	//return DailySales::whereBetween('DATEDAILYRPT', [date('Y/m/d', $lastDay), date('Y/m/d')])
+    	return DailySales::whereBetween('DATEDAILYRPT', ['2016/03/01', '2016/03/10'])
     			->where('DESCRIPTION','=> TOTAL REVENUE')
     			->select('DATEDAILYRPT','TODAY','DESCRIPTION')
     			->get();
@@ -26,19 +34,26 @@ class EloquentDailySalesRepository implements DailySalesContract
     public function getTenDaysAR()
     {
     	$lastDay = strtotime("-10 day");
-    	return DailySales::whereBetween('DATEDAILYRPT', [date('Y/m/d', $lastDay), date('Y/m/d')])
-    	//return DailySales::whereBetween('DATEDAILYRPT', ['2015/07/01', '2015/07/07'])
+    	//return DailySales::whereBetween('DATEDAILYRPT', [date('Y/m/d', $lastDay), date('Y/m/d')])
+    	return DailySales::whereBetween('DATEDAILYRPT', ['2016/03/01', '2016/03/10'])
     			->where('DESCRIPTION','=> BALANCE (A)-(B)')
     			->select('DATEDAILYRPT','TODAY','DESCRIPTION')
     			->get();
     }
-    public function getRevenueChild($dt)
+    public function getTenDaysSales()
     {
         return DailySales::where('NORPT','>=','20')
                 ->where('NORPT','<=','28')
-                ->where('DATEDAILYRPT',$dt)
-                ->select('DESCRIPTION', 'TODAY','THISMONTH','THISYEAR')
-                ->orderBy('NORPT','asc')
+                ->whereBetween('DATEDAILYRPT',['2016/03/01', '2016/03/20'])
+                ->select('DATEDAILYRPT', 'DESCRIPTION','TODAY')
+                ->get();
+    }
+    public function getSalesLabel()
+    {
+        return DailySales::where('NORPT','>=','20')
+                ->where('NORPT','<=','28')
+                ->where('DATEDAILYRPT','2016/03/01')
+                ->select('DESCRIPTION')
                 ->get();
     }
 

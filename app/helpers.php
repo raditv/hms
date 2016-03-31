@@ -27,6 +27,16 @@ if (! function_exists('access')) {
     }
 }
 
+if (! function_exists('chart')) {
+    /**
+     * Access (lol) the Access:: facade as a simple function
+     */
+    function chart()
+    {
+        return app('chart');
+    }
+}
+
 if (! function_exists('javascript')) {
     /**
      * Access the javascript helper
