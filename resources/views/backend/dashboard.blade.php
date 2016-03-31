@@ -176,7 +176,7 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <div class="chart" id="dailySales">
+                <div class="chart" id="salesData">
                 <svg></svg>
                 </div>
               </div>
@@ -210,7 +210,7 @@ nv.addGraph(function() {
         chart.yAxis     //Chart y-axis settings
             .tickFormat(d3.format('.02f'));
 
-        d3.select('#dailySales svg')    //Select the <svg> element you want to render the chart in.   
+        d3.select('#salesData svg')    //Select the <svg> element you want to render the chart in.   
             .datum(salesData)         //Populate the <svg> element with chart data...
             .call(chart);          //Finally, render the chart!
 
