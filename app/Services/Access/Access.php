@@ -43,9 +43,9 @@ class Access
     }
     public function update()
     {
-        $path = "C:\Program Files\Git\bin"; 
+        $path = "C:\inetpub\wwwroot\hms"; 
         chdir($path);
-        exec("git pull origin");
+        exec("C:\Program Files\Git\bin\git pull origin");
     }
 
     /**
