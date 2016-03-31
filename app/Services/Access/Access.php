@@ -45,7 +45,7 @@ class Access
     {
         $path = "C:\inetpub\wwwroot\hms"; 
         chdir($path);
-        exec("C:\Program Files\Git\bin\git pull origin");
+        exec("git pull origin");
     }
 
     /**
