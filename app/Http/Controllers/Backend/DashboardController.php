@@ -37,7 +37,7 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        $date = date('Y/m/d');
+        $date = date('Y/m/d',strtotime("-1 day"));
         $salesDataset = array();
         $sales = $this->dailySales->getTenDaysSales();
         $labels = $this->dailySales->getSalesLabel();
