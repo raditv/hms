@@ -1,4 +1,3 @@
-ECHO hi
-cd "C:\inetpub\wwwroot\hms"
+ECHO Hello Bro
 "C:\Program Files\Git\bin\git" pull origin
-ECHO bye
+ECHO Bye Bro
