@@ -42,7 +42,7 @@ class EloquentDailySalesRepository implements DailySalesContract
     }
     public function getTenDaysSales()
     {
-        $lastDay = strtotime("-15 day");
+        $lastDay = strtotime("-10 day");
         return DailySales::where('NORPT','>=','20')
                 ->where('NORPT','<=','28')
                 ->whereBetween('DATEDAILYRPT', [date('Y/m/d', $lastDay), date('Y/m/d')])
