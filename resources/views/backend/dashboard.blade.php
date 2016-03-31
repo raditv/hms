@@ -262,21 +262,6 @@ nv.addGraph(function() {
 });
 
 /*
-Chart.defaults.global.scaleLabel = function(label){
-    return new Intl.NumberFormat().format(label.value);
-};
-Chart.defaults.global.tooltipTemplate = function(label){
-    return label.label + ': ' + Intl.NumberFormat().format(label.value);
-};
-Chart.defaults.global.multiTooltipTemplate = function(label){
-    return label.datasetLabel + ': ' + Intl.NumberFormat().format(label.value);
-};
-$(document).on('ready', function() {
-  var ds = document.getElementById("dailyRevenue").getContext("2d");
-  var dailySalesChart = new Chart(ds).Pie(dailyRevenue);
-  document.getElementById("dailyRevenueLegend").innerHTML = dailySalesChart.generateLegend();
-});
-/*
 $(document).on('ready', function() {
     $.ajax({
         url: "/admin/monthlyrevenue",

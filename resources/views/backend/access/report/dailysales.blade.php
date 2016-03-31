@@ -11,6 +11,7 @@
 
 @section('after-styles-end')
     {!! Html::style('js/backend/plugin/datepicker/datepicker3.css') !!}
+    {!! Html::style('js/backend/plugin/d3/nv.d3.css') !!}
 @stop
 
 @section('content')
@@ -89,16 +90,126 @@
                 @endforeach
                 </table>
             </div>
+            <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-4 connectedSortable">
+          <!-- LINE CHART -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Daily Sales</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div class="chart" id="dailySales">
+                <svg></svg>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        </section>
+        <section class="col-lg-4 connectedSortable">
+          <!-- LINE CHART -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Monthly Sales</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div class="chart" id="monthlySales">
+                <svg></svg>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        </section>
+        <section class="col-lg-4 connectedSortable">
+          <!-- LINE CHART -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Yearly Sales</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div class="chart" id="yearlySales">
+                <svg></svg>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        </section>
+        </div>
             <div class="clearfix"></div>
         </div><!-- /.box-body -->
     </div><!--box-->
 @stop
 @section('after-scripts-end')
 {!! Html::script('js/backend/plugin/datepicker/bootstrap-datepicker.js') !!}
+{!! Html::script('js/backend/plugin/d3/d3.v3.min.js') !!}
+{!! Html::script('js/backend/plugin/d3/nv.d3.min.js') !!}
 <script type="text/javascript">
 $('#date').datepicker({
     format: 'yyyy/mm/dd',
     autoclose: true
-    });
+});
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)
+      .color(d3.scale.category10().range());
+
+    d3.select("#dailySales svg")
+        .datum(dailySales)
+      .transition().duration(1200)
+        .call(chart);
+
+  return chart;
+});
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)
+      .color(d3.scale.category10().range());
+
+    d3.select("#monthlySales svg")
+        .datum(monthlySales)
+      .transition().duration(1200)
+        .call(chart);
+
+  return chart;
+});
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)
+      .color(d3.scale.category10().range());
+
+    d3.select("#yearlySales svg")
+        .datum(yearlySales)
+      .transition().duration(1200)
+        .call(chart);
+
+  return chart;
+});
 </script>
 @stop

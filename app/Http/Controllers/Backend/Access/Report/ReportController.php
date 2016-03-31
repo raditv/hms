@@ -27,6 +27,24 @@ class ReportController extends Controller
     	if(count($request['date']))
     	{
     		$date = $request['date'];
+            $data = array();
+            $mdata = array();
+            $ydata = array();
+            $sales = $this->dailySales->getTodaySales($date);
+            foreach($sales as $key => $sale)
+            {
+            array_push($data, array("label" => str_replace(' ', '', $sale->DESCRIPTION),
+                                    "value" =>  intval($sale->TODAY)));
+            array_push($mdata, array("label" => str_replace(' ', '', $sale->DESCRIPTION),
+                                    "value" =>  intval($sale->THISMONTH)));
+            array_push($ydata, array("label" => str_replace(' ', '', $sale->DESCRIPTION),
+                                    "value" =>  intval($sale->THISYEAR)));
+            }
+            javascript()->put([
+            'dailySales' => $data,
+            'monthlySales' => $mdata,
+            'yearlySales' => $ydata,
+            ]);
     		return view('backend.access.report.dailysales')
     	 	->withSales($this->dailySales->generateReport($date))
     	 	->withDate($date);
@@ -34,6 +52,24 @@ class ReportController extends Controller
     	else
     	{
     		$date = date('Y/m/d');
+            $data = array();
+            $mdata = array();
+            $ydata = array();
+            $sales = $this->dailySales->getTodaySales($date);
+            foreach($sales as $key => $sale)
+            {
+            array_push($data, array("label" => str_replace(' ', '', $sale->DESCRIPTION),
+                                    "value" =>  intval($sale->TODAY)));
+            array_push($mdata, array("label" => str_replace(' ', '', $sale->DESCRIPTION),
+                                    "value" =>  intval($sale->THISMONTH)));
+            array_push($ydata, array("label" => str_replace(' ', '', $sale->DESCRIPTION),
+                                    "value" =>  intval($sale->THISYEAR)));
+            }
+            javascript()->put([
+            'dailySales' => $data,
+            'monthlySales' => $mdata,
+            'yearlySales' => $ydata,
+            ]);
     		return view('backend.access.report.dailysales')
     	 	->withSales($this->dailySales->generateReport($date))
     	 	->withDate($date);;
