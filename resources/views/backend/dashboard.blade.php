@@ -100,7 +100,7 @@
     </div>
     <div class="row">
         <!-- Left col -->
-        <section class="col-lg-12 connectedSortable">
+        <section class="col-lg-4 connectedSortable">
           <!-- LINE CHART -->
           <div class="box box-info">
             <div class="box-header with-border">
@@ -114,6 +114,48 @@
             <div class="box-body">
               <div class="chart">
                 <div class="chart" id="dailyRevenue">
+                <svg></svg>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        </section>
+        <section class="col-lg-4 connectedSortable">
+          <!-- LINE CHART -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Monthly Sales</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div class="chart" id="abc">
+                <svg></svg>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        </section>
+        <section class="col-lg-4 connectedSortable">
+          <!-- LINE CHART -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Yearly Sales</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div class="chart" id="test">
                 <svg></svg>
                 </div>
               </div>
