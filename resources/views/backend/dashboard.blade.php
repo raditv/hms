@@ -113,7 +113,7 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <div class="chart" id="dailyRevenue">
+                <div class="chart" id="dailySales">
                 <svg></svg>
                 </div>
               </div>
@@ -134,7 +134,7 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <div class="chart" id="abc">
+                <div class="chart" id="monthlySales">
                 <svg></svg>
                 </div>
               </div>
@@ -155,7 +155,7 @@
             </div>
             <div class="box-body">
               <div class="chart">
-                <div class="chart" id="test">
+                <div class="chart" id="yearlySales">
                 <svg></svg>
                 </div>
               </div>
@@ -225,8 +225,36 @@ nv.addGraph(function() {
       .showLabels(true)
       .color(d3.scale.category10().range());
 
-    d3.select("#dailyRevenue svg")
-        .datum(testChart)
+    d3.select("#dailySales svg")
+        .datum(dailySales)
+      .transition().duration(1200)
+        .call(chart);
+
+  return chart;
+});
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)
+      .color(d3.scale.category10().range());
+
+    d3.select("#monthlySales svg")
+        .datum(dailySales)
+      .transition().duration(1200)
+        .call(chart);
+
+  return chart;
+});
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)
+      .color(d3.scale.category10().range());
+
+    d3.select("#yearlySales svg")
+        .datum(dailySales)
       .transition().duration(1200)
         .call(chart);
 

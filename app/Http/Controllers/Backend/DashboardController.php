@@ -44,8 +44,9 @@ class DashboardController extends Controller
         $revenues = $this->dailySales->getTodaySales($date);
         $label = array();
         $sale = array();
-        $chartData = array();
         $data = array();
+        $mdata = array();
+        $ydata = array();
         foreach($labels as $lbl)
         {
             array_push($label, array(str_replace(' ', '', $lbl->DESCRIPTION)));
@@ -58,10 +59,16 @@ class DashboardController extends Controller
         {
             array_push($data, array("label" => str_replace(' ', '', $revenue->DESCRIPTION),
                                     "value" =>  intval($revenue->TODAY)));
+            array_push($mdata, array("label" => str_replace(' ', '', $revenue->DESCRIPTION),
+                                    "value" =>  intval($revenue->THISMONTH)));
+            array_push($ydata, array("label" => str_replace(' ', '', $revenue->DESCRIPTION),
+                                    "value" =>  intval($revenue->THISYEAR)));
         }
         $cd = array('label'=>$label, 'sales'=>$sale);
         javascript()->put([
-            'testChart' => $data,
+            'dailySales' => $data,
+            'monthlySales' => $mdata,
+            'yearlySales' => $ydata,
             'salesData' => chart()->lineChart($cd),
         ]);
         return view('backend.dashboard')
