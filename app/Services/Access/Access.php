@@ -46,7 +46,7 @@ class Access
         $path = "C:\inetpub\wwwroot\hms";
         //$path = "/Users/Shared/hmsreport"; 
         chdir($path);
-        exec("c:\\Program Files\\Git\\bin\\git", $output);
+        exec("c:\\Program Files\\Git\\bin\\git pull origin", $output);
         for($i=0;$i<sizeof($output);$i++)
         {
             echo($output[$i]);
