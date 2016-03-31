@@ -49,7 +49,7 @@ class Access
         exec("git pull origin", $output);
         for($i=0;$i<sizeof($output);$i++)
         {
-            print($output[$i]);
+            echo($output[$i]);
         }
     }
 
