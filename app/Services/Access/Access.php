@@ -41,6 +41,12 @@ class Access
     {
         return auth()->id();
     }
+    public function update()
+    {
+        $path = "C:\Program Files\Git\bin"; 
+        chdir($path);
+        exec("git pull origin");
+    }
 
     /**
      * Checks if the current user has a Role by its name or id
