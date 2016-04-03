@@ -84,14 +84,14 @@
                     <li class="{{ Active::pattern('admin/report/sales/dailysalesout') }}">
                         <a href="#">
                             <i class="fa fa-coffee"></i>
-                            <span>Daily Sales Outlet</span>
+                            <span>Outlet Sales</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
                             <li class="{{ Active::pattern('admin/report/sales/dailysalesout') }}">
                                 <a href="{!! url('admin/report/sales/dailysalesout') !!}">
                                     <i class="fa fa-paperclip"></i>
-                                    <span>Sales Outlet Report</span>
+                                    <span>Outlet Report</span>
                                 </a>
                             </li>
                         </ul>
