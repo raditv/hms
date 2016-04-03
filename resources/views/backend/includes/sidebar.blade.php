@@ -60,7 +60,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Active::pattern('admin/report/sales/dailysales') }}">
+                    <li class="{{ Active::pattern('admin/report/sales/dailysales*') }}">
                         <a href="#">
                             <i class="fa fa-bed"></i>
                             <span>Daily Sales</span>
@@ -69,12 +69,11 @@
                         <ul class="treeview-menu">
                             <li class="{{ Active::pattern('admin/report/sales/dailysales') }}">
                                 <a href="{!! url('admin/report/sales/dailysales') !!}">
-                                    <i class="fa fa-paperclip"></i>
                                     <span>Daily Sales Report</span>
                                 </a>
                             </li>
-                            <li class="{{ Active::pattern('admin/report/sales/dailysaleschart') }}">
-                                <a href="{!! url('admin/report/sales/dailysaleschart') !!}">
+                            <li class="{{ Active::pattern('admin/report/sales/dailysales/chart') }}">
+                                <a href="{!! url('admin/report/sales/dailysales/chart') !!}">
                                     <i class="fa fa-area-chart"></i>
                                     <span>Daily Sales Chart</span>
                                 </a>
@@ -92,12 +91,6 @@
                                 <a href="{!! url('admin/report/sales/dailysalesout') !!}">
                                     <i class="fa fa-paperclip"></i>
                                     <span>Daily Sales Outlet Report</span>
-                                </a>
-                            </li>
-                            <li class="{{ Active::pattern('admin/report/sales/dailysalesoutchart') }}">
-                                <a href="{!! url('admin/report/sales/dailysalesoutchart') !!}">
-                                    <i class="fa fa-area-chart"></i>
-                                    <span>Daily Sales Outlet Chart</span>
                                 </a>
                             </li>
                         </ul>

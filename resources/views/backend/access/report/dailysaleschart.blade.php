@@ -10,6 +10,7 @@
 @endsection
 
 @section('after-styles-end')
+    {!! Html::style('js/backend/plugin/daterangepicker/daterangepicker-bs3.css') !!}
     {!! Html::style('js/backend/plugin/datepicker/datepicker3.css') !!}
 @stop
 
@@ -23,13 +24,13 @@
             <div class="form-group">
             {!! Form::open(['route' => 'admin.report.sales.post.dailysales', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) !!}
 
-                <div class="input-group date">
+                <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
                   {!! Form::text('date', null, ['class' => 'form-control pull-right', 'placeholder' => trans('menus.backend.report.date-chooser'), 'id' => 'date']) !!}
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat">Generate Report</button>
+                      <button type="submit" class="btn btn-info btn-flat">Generate Chart!</button>
                     </span>
                 </div>
                {!! Form::close() !!}
@@ -43,11 +44,10 @@
     </div><!--box-->
 @stop
 @section('after-scripts-end')
+{!! Html::script('js/backend/plugin/daterangepicker/moment.min.js') !!}
+{!! Html::script('js/backend/plugin/daterangepicker/daterangepicker.js') !!}
 {!! Html::script('js/backend/plugin/datepicker/bootstrap-datepicker.js') !!}
 <script type="text/javascript">
-$('#date').datepicker({
-    format: 'yyyy/mm/dd',
-    autoclose: true
-    });
+$('#date').daterangepicker();
 </script>
 @stop
