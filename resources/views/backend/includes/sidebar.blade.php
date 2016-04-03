@@ -69,13 +69,14 @@
                         <ul class="treeview-menu">
                             <li class="{{ Active::pattern('admin/report/sales/dailysales') }}">
                                 <a href="{!! url('admin/report/sales/dailysales') !!}">
-                                    <span>Daily Sales Report</span>
+                                    <i class="fa fa-paperclip"></i>
+                                    <span>Sales Report</span>
                                 </a>
                             </li>
                             <li class="{{ Active::pattern('admin/report/sales/dailysales/chart') }}">
                                 <a href="{!! url('admin/report/sales/dailysales/chart') !!}">
                                     <i class="fa fa-area-chart"></i>
-                                    <span>Daily Sales Chart</span>
+                                    <span>Sales Chart</span>
                                 </a>
                             </li>
                         </ul>
@@ -90,7 +91,7 @@
                             <li class="{{ Active::pattern('admin/report/sales/dailysalesout') }}">
                                 <a href="{!! url('admin/report/sales/dailysalesout') !!}">
                                     <i class="fa fa-paperclip"></i>
-                                    <span>Daily Sales Outlet Report</span>
+                                    <span>Sales Outlet Report</span>
                                 </a>
                             </li>
                         </ul>
